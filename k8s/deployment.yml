@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: django-app-container
-        image: poncdti/django-todo:v1.1
+        image: poncdti/django-todo:v1.2
         ports:
         - containerPort: 8000
