@@ -11,6 +11,14 @@ class IndexView(generic.ListView):
         """Return all the latest todos."""
         return Todo.objects.order_by('-created_at')
 
+class HelloView(generic.ListView):
+    template_name = 'todos/hello.html'
+    # context_object_name = 'todo_list'
+
+    def get_queryset(self):
+        """Return all the latest todos."""
+        return Todo.objects.order_by('-created_at')
+
 def add(request):
     title = request.POST['title']
     Todo.objects.create(title=title)
