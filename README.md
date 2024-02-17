@@ -36,3 +36,18 @@ $ python manage.py runserver
 Once the server is hosted, head over to http://127.0.0.1:8000/todos for the App.
 
 Cheers and Happy Coding :
+
+### RUN K8S
+If have this error "Error from server (NotFound): error when creating pod.yaml : namespaces my-django-app not found"
+run this command
+```bash
+$ kubectl create namespace my-django-app
+```
+Run this command to start Kubernetes
+```bash
+$ kubectl apply -f run-k8s.yml
+```
+When you want stop this App
+```bash
+$ kubectl delete -f run-k8s.yml
+```
