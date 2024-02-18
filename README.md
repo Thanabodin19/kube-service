@@ -55,3 +55,36 @@ When you want stop this App
 ```bash
 $ kubectl delete -f run-k8s.yml
 ```
+
+### Run App in Server
+Step 1 Update the instance packages
+```bash
+sudo apt update
+```
+Step 2 Install Docker
+```bash
+sudo apt -y install docker.io
+```
+Step 3 Install Minikube and conntrack
+```bash
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin/kubectl
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+apt install conntrack
+```
+Step 4 add the current user to the docker group and start a new shell with the updated group membership.
+```bash
+sudo usermod -aG docker $USER && newgrp docker
+```
+Step 5 Start Minikube
+```bash
+minikube start --driver=docker
+```
+Step 6 Don't forgot login docker
+```bash
+Docker login
+```
+Step 7 run K8S
+Step 8 Forward port
+```bash
+kubectl port-forward svc/my-django-app-service 3000:80 --address 0.0.0.0 &
+```
