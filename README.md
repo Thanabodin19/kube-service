@@ -5,32 +5,32 @@ A simple todo app built with django
 ### Setup
 To get this repository, run the following command inside your git enabled terminal
 ```bash
-$ git clone https://github.com/shreys7/django-todo.git
+git clone https://github.com/shreys7/django-todo.git
 ```
 You will need django to be installed in you computer to run this app. Head over to https://www.djangoproject.com/download/ for the download guide
 
 Once you have downloaded django, go to the cloned repo directory and run the following command
 
 ```bash
-$ python manage.py makemigrations
+python manage.py makemigrations
 ```
 
 This will create all the migrations file (database migrations) required to run this App.
 
 Now, to apply this migrations run the following command
 ```bash
-$ python manage.py migrate
+python manage.py migrate
 ```
 
 One last step and then our todo App will be live. We need to create an admin user to run this App. On the terminal, type the following command and provide username, password and email for the admin user
 ```bash
-$ python manage.py createsuperuser
+python manage.py createsuperuser
 ```
 
 That was pretty simple, right? Now let's make the App live. We just need to start the server now and then we can start using our simple todo App. Start the server by following command
 
 ```bash
-$ python manage.py runserver
+python manage.py runserver
 ```
 
 Once the server is hosted, head over to http://127.0.0.1:8000/todos for the App.
@@ -45,15 +45,15 @@ RUN echo "from django.contrib.auth.models import User; User.objects.create_super
 If have this error "Error from server (NotFound): error when creating pod.yaml : namespaces my-django-app not found"
 run this command
 ```bash
-$ kubectl create namespace my-django-app
+kubectl create namespace my-django-app
 ```
 Run this command to start Kubernetes
 ```bash
-$ kubectl apply -f run-k8s.yml
+kubectl apply -f run-k8s.yml
 ```
 When you want stop this App
 ```bash
-$ kubectl delete -f run-k8s.yml
+kubectl delete -f run-k8s.yml
 ```
 
 ### Run App in Server
@@ -84,6 +84,9 @@ Step 6 Don't forgot login docker
 Docker login
 ```
 Step 7 run K8S <br />
+```bash
+kubectl apply -f run-k8s.yml
+```
 Step 8 Forward port
 ```bash
 kubectl port-forward svc/my-django-app-service 3000:80 --address 0.0.0.0 &
