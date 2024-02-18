@@ -91,3 +91,25 @@ Step 8 Forward port
 ```bash
 kubectl port-forward svc/my-django-app-service 3000:80 --address 0.0.0.0 &
 ```
+
+## run image => pod => service => port-forward
+step 1 run image => pod
+```bash
+kubectl run djangoapp --image=thanabodin19/django-todo:latest
+```
+step 2 get pod
+```bash
+kubectl get pods
+```
+step 3 make service 
+```bash
+kubectl expose pod djangoapp --type=NodePort --port=8000 --name=django-service
+```
+step 4 get service
+```bash
+kubectl get svc
+```
+step 5 port-forward
+```bash
+kubectl port-forward svc/django-service 3000:8000 --address 0.0.0.0 &
+```
