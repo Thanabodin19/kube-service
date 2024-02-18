@@ -79,7 +79,7 @@ Step 5 Start Minikube
 ```bash
 minikube start --driver=docker
 ```
-Step 6 Don't forgot login docker
+Step 6 Don't forget login docker
 ```bash
 Docker login
 ```
