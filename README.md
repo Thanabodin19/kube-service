@@ -83,7 +83,7 @@ Step 6 Don't forgot login docker
 ```bash
 Docker login
 ```
-Step 7 run K8S
+Step 7 run K8S <br />
 Step 8 Forward port
 ```bash
 kubectl port-forward svc/my-django-app-service 3000:80 --address 0.0.0.0 &
