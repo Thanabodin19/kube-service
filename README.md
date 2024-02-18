@@ -37,7 +37,7 @@ Once the server is hosted, head over to http://127.0.0.1:8000/todos for the App.
 
 Cheers and Happy Coding :
 
-### Create Admin User
+### Create Admin User Put it in docker file and build image
 ```bash
 RUN echo "from django.contrib.auth.models import User; User.objects.create_superuser('<user_admin>', '<admin_email>', '<admin_pass>')" | python manage.py shell
 ```
