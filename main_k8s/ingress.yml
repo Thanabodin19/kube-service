@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress # ประเภทของ Resource
+metadata:
+  name: ingress-django # ชื่อของ Ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  tls: # เพิ่มในส่วนของการทำ HTTPs เข้ามา
+  - hosts:
+      - todo-jae.com # ระบุ Host สำหรับการทำ HTTPs
+    secretName: ingress-tls # ชื่อของ Secret ที่เก็บไฟล์ KEY และ CERT ไว้
+  rules: # ส่วนของการกำหนด Rule ให้กับ Ingress
+  - host: todo-jae.com # Hostname ที่จะให้ User เข้าใช้งาน
+    http:
+      paths:
+      - path: / # Path ที่จะให้เข้ามาใช้งาน Pod
+        pathType: Prefix # ประเภทของการ Match Path
+        backend: # ส่วนของการระบุ Service ที่จะให้นำทางไปยัง Pod
+          service:
+            name: my-django-app-service # ชื่อของ Service
+            port:
+              number: 80 #  Port ของ Service
