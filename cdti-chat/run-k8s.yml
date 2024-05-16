@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cdti-chat-service
+spec:
+  type: ClusterIP
+  selector:
+    app: cdti-chat
+  ports:
+    - port: 80
+      targetPort: 3000
+      # Optional field
+      # By default and for convenience, the Kubernetes control plane will allocate a port from a range (default: 30000-32767)
+      # nodePort: 30009
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cdti-chat-deployment
+  labels:
+    app: cdti-chat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cdti-chat
+  template:
+    metadata:
+      labels:
+        app: cdti-chat
+    spec:
+      containers:
+      - name: cdti-chat-container
+        image: thanabodin19/cdti-chat:latest
+        ports:
+        - containerPort: 3000
+        resources: # เพิ่มในส่วนของ Reources
+          requests: # Request Resource สำหรับ Container
+            memory: "512Mi"
+            cpu: "256m"
+          limits: # Limit Resource สำหรับ Container
+            memory: "1Gi"
+            cpu: "512m"

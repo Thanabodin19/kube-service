@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress # ประเภทของ Resource
+metadata:
+  name: cdti-chat-ingress # ชื่อของ Ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  tls: # เพิ่มในส่วนของการทำ HTTPs เข้ามา
+  - hosts:
+      - cdti-chat.com # ระบุ Host สำหรับการทำ HTTPs
+    secretName: ingress-tls # ชื่อของ Secret ที่เก็บไฟล์ KEY และ CERT ไว้
+  rules: # ส่วนของการกำหนด Rule ให้กับ Ingress
+  - host: cdti-chat.com # Hostname ที่จะให้ User เข้าใช้งาน
+    http:
+      paths:
+      - path: / # Path ที่จะให้เข้ามาใช้งาน Pod
+        pathType: Prefix # ประเภทของการ Match Path
+        backend: # ส่วนของการระบุ Service ที่จะให้นำทางไปยัง Pod
+          service:
+            name: cdti-chat-service # ชื่อของ Service
+            port:
+              number: 80 #  Port ของ Service
+
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: IngressClass
+# metadata:
+#   labels:
+#     app.kubernetes.io/component: controller
+#   name: nginx-example
+#   annotations:
+#     ingressclass.kubernetes.io/is-default-class: "true"
+# spec:
+#   controller: k8s.io/ingress-nginx
