@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: cdti-chat-container
-        image: thanabodin19/cdti-chat:latest
+        image: gitlab.inox.co.th:4567/thanabodin/chat-jae:1.0.0
         ports:
         - containerPort: 3000
         resources: # เพิ่มในส่วนของ Reources
@@ -42,3 +42,5 @@ spec:
           limits: # Limit Resource สำหรับ Container
             memory: "1Gi"
             cpu: "512m"
+      imagePullSecrets:
+      - name: gitlab-registry
